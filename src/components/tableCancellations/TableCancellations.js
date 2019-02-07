@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
-import { Container, Loader } from 'semantic-ui-react';
+import { Container, Loader, Header } from 'semantic-ui-react';
 import { TableHeader } from './components/tableHeader';
 import { TableRow } from './components/tableRow';
 
@@ -9,7 +9,7 @@ export default class TableCancellations extends Component {
   state = { isLoading: true, cancellations: [] };
 
   componentDidMount() {
-    fetch('https://gamecancellations.herokuapp.com/games')
+    fetch('games')
       .then(response => response.json())
       .then(result => {
         this.setState({
@@ -29,7 +29,8 @@ export default class TableCancellations extends Component {
     const { isLoading } = this.state;
     return <Container textAlign='justified'>
       <Loader active={isLoading} content='Loading' />
-      <Table celled structured>
+      <Header size='large'>Game cancellations</Header>
+      <Table celled structured selectable color='blue' >
         <TableHeader />
         <Table.Body>
           {this.getTableRows()}

@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Icon } from 'semantic-ui-react'
 
 export class TableHeader extends Component {
   render() {
-    return <Table.Header>
+    return <Table.Header >
       <Table.Row>
-        <Table.HeaderCell rowSpan='2' singleLine>Id</Table.HeaderCell>
+        <Table.HeaderCell rowSpan='2' singleLine textAlign='center'>
+          <Icon name='hashtag' />
+        </Table.HeaderCell>
         <Table.HeaderCell rowSpan='2'>Group Name</Table.HeaderCell>
         <Table.HeaderCell rowSpan='2'>Status</Table.HeaderCell>
         <Table.HeaderCell rowSpan='2'>Cancel Reason</Table.HeaderCell>

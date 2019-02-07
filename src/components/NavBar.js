@@ -1,49 +1,52 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu } from 'semantic-ui-react';
-import logo from '../logo.svg';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
+import logo from '../logo.svg';
 
-class NavBar extends Component {
-  state = {}
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+const menuStyle = { 'borderRadius': 0 };
 
-  render() {
-    const { activeItem } = this.state
+export function NavBar() {
+  const [activeItem, setActiveItem] = useState('');
 
-    return (
-      <Menu stackable>
-        <Menu.Item>
-          <img src={logo} alt='logo' />
+  const handleItemClick = (e, { name }) => setActiveItem(name);
+
+  useEffect(() => {
+    setActiveItem(window.location.pathname.slice(1));
+  });
+
+
+
+  return (
+    <Menu stackable inverted style={menuStyle}>
+      <Menu.Item>
+        <img src={logo} alt='logo' />
+      </Menu.Item>
+      <Menu.Item as={Link} to='/'
+        name=''
+        color='blue'
+        active={activeItem === ''}
+        onClick={handleItemClick}
+      >
+        Cancellations
         </Menu.Item>
-
-        <Menu.Item as={Link} to='/'
-          name='cancellations'
-          active={activeItem === 'cancellations'}
-          onClick={this.handleItemClick}
-        >
-          Cancellations
+      <Menu.Item as={Link} to='/card'
+        name='card'
+        color='blue'
+        active={activeItem === 'card'}
+        onClick={handleItemClick}
+      >
+        Card
         </Menu.Item>
-
-        <Menu.Item as={Link} to='/card'
-          name='card'
-          active={activeItem === 'card'}
-          onClick={this.handleItemClick}
-        >
-          Card
-        </Menu.Item>
-
-        <Menu.Item as={Link} to='/add'
-          name='+'
-          active={activeItem === '+'}
-          onClick={this.handleItemClick}
-        >
-          <Icon name='plus' size='small' />
-        </Menu.Item>
-      </Menu>
-    )
-  }
+      <Menu.Item as={Link} to='/add'
+        name='add'
+        color='blue'
+        active={activeItem === 'add'}
+        onClick={handleItemClick}
+      >
+        <Icon name='plus' size='small' />
+      </Menu.Item>
+    </Menu>
+  )
 }
-
-export default NavBar

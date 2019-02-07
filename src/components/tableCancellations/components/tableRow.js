@@ -20,17 +20,15 @@ export class TableRow extends Component {
 
   render() {
     const { id, groupName, status, cancellationReason } = this.props.item;
-    return <>
-      <Table.Row>
-        <Table.Cell>
-          <Header as='h2' textAlign='center'>{id}</Header>
-        </Table.Cell>
-        <Table.Cell singleLine>{groupName}</Table.Cell>
-        <Table.Cell>{status}</Table.Cell>
-        <Table.Cell>{cancellationReason}</Table.Cell>
-        <Table.Cell>{this.getPlayersNumList()}</Table.Cell>
-        <Table.Cell>{this.getPlayersNameList()}</Table.Cell>
-      </Table.Row>
-    </>
+    return <Table.Row>
+      <Table.Cell>
+        <Header as='h2' textAlign='center'>{id}</Header>
+      </Table.Cell>
+      <Table.Cell singleLine>{groupName}</Table.Cell>
+      <Table.Cell>{status}</Table.Cell>
+      <Table.Cell>{cancellationReason}</Table.Cell>
+      <Table.Cell>{this.getPlayersNumList()}</Table.Cell>
+      <Table.Cell>{this.getPlayersNameList()}</Table.Cell>
+    </Table.Row>
   }
 }
