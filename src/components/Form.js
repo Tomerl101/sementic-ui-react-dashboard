@@ -1,77 +1,68 @@
-import React, { Component } from 'react'
-import { Form, Input, Loader, Header } from 'semantic-ui-react'
-import { Container } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Container, Segment, Form, Input, Header } from 'semantic-ui-react'
+import { updateStatus } from '../api/updateStatus';
 
-export class FormUi extends Component {
+export function FormUi() {
+  const [form, setValues] = useState({ id: '', status: '', reason: '', name: '' });
 
-  state = { isLoading: false, id: '', status: '', reason: '', name: '' }
+  const [isLoading, setIsLoading] = useState(false);
 
-  handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value })
+  const handleChange = (e, { name, value }) => {
+    setValues(({ ...form, [name]: value }))
   }
 
-  handleSubmit = () => {
-    const { id, status } = this.state
-    this.setState({ isLoading: true });
-    fetch(`/game/${id}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ status })
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          cancellations: result,
-          isLoading: false
-        })
-      })
-      .catch(error => console.log(error))
-    this.setState({ id: '', status: '', name: '', reason: '' })
+  const handleSubmit = async () => {
+    try {
+      const { id, status } = form;
+      setIsLoading(true);
+      await updateStatus(id, status);
+      setValues({ id: '', status: '', name: '', reason: '' });
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  render() {
-    const { isLoading, id, status, reason, name } = this.state;
-    return <Container textAlign='justified'>
-      <Loader active={isLoading}>Loading</Loader>
-      <Header size='large'>Update Game</Header>
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Group widths='equal'>
-          <Form.Input
-            label='id'
-            placeholder='id'
-            name='id'
-            value={id}
-            onChange={this.handleChange}
+  return (
+    <Container textAlign='justified'>
+      <Segment>
+        <Header size='large'>Update Game</Header>
+        <Form loading={isLoading} onSubmit={handleSubmit}>
+          <Form.Group widths='equal'>
+            <Form.Input
+              label='id'
+              placeholder='id'
+              name='id'
+              value={form.id}
+              onChange={handleChange}
+            />
+            <Form.Input
+              control={Input}
+              label='Group Name'
+              placeholder='Group Name'
+              name='name'
+              value={form.name}
+              onChange={handleChange}
+            />
+            <Form.Input
+              control={Input}
+              label='Status'
+              name='status'
+              value={form.status}
+              placeholder='Status'
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.TextArea
+            label='Cancel Reason'
+            placeholder='Cancel Reason'
+            name='reason'
+            value={form.reason}
+            onChange={handleChange}
           />
-          <Form.Input
-            control={Input}
-            label='Group Name'
-            placeholder='Group Name'
-            name='name'
-            value={name}
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            control={Input}
-            label='Status'
-            name='status'
-            value={status}
-            placeholder='Status'
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Form.TextArea
-          label='Cancel Reason'
-          placeholder='Cancel Reason'
-          name='reason'
-          value={reason}
-          onChange={this.handleChange}
-        />
-        <Form.Button content='Send' color='blue' />
-      </Form>
+          <Form.Button content='Send' color='blue' />
+        </Form>
+      </Segment>
     </Container>
-  }
+  )
 }

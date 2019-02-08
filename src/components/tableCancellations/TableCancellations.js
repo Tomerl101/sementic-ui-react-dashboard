@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
-import { Container, Loader, Header } from 'semantic-ui-react';
+import { Container, Loader, Header, Segment } from 'semantic-ui-react';
 import { TableHeader } from './components/tableHeader';
 import { TableRow } from './components/tableRow';
 
@@ -29,13 +29,15 @@ export default class TableCancellations extends Component {
     const { isLoading } = this.state;
     return <Container textAlign='justified'>
       <Loader active={isLoading} content='Loading' />
-      <Header size='large'>Game cancellations</Header>
-      <Table celled structured selectable color='blue' >
-        <TableHeader />
-        <Table.Body>
-          {this.getTableRows()}
-        </Table.Body>
-      </Table>
+      <Segment>
+        <Header size='large'>Game cancellations</Header>
+        <Table celled structured selectable color='blue' >
+          <TableHeader />
+          <Table.Body>
+            {this.getTableRows()}
+          </Table.Body>
+        </Table>
+      </Segment>
     </Container>
   }
 }

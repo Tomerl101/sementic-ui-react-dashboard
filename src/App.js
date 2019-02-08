@@ -5,16 +5,17 @@ import TableCancellations from './components/tableCancellations/TableCancellatio
 import Card from './components/CardContent';
 import { FormUi as Form } from './components/Form'
 
+const appStyle = { backgroundColor: "#f7f7f7", height: "100vh" }
 
 function App() {
-  return <>
+  return <div style={appStyle}>
     <NavBar />
     <Switch>
       <Route exact path="/" component={TableCancellations} />
       <Route exact path="/card" component={Card} />
       <Route exact path="/add" component={Form} />
     </Switch>
-  </>
+  </div>
 }
 
 export default App;

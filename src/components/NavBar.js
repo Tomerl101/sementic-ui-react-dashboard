@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { Icon } from 'semantic-ui-react';
 import logo from '../logo.svg';
-
 
 const menuStyle = { 'borderRadius': 0 };
 
@@ -16,10 +14,8 @@ export function NavBar() {
     setActiveItem(window.location.pathname.slice(1));
   });
 
-
-
   return (
-    <Menu stackable inverted style={menuStyle}>
+    <Menu size='large' stackable inverted style={menuStyle}>
       <Menu.Item>
         <img src={logo} alt='logo' />
       </Menu.Item>
