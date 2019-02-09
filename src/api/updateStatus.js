@@ -12,6 +12,6 @@ export function updateStatus(id, status) {
       .then(result => {
         resolve(result);
       })
-      .catch(error => console.log(error))
+      .catch(error => reject(error))
   })
 }

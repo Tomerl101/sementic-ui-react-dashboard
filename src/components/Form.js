@@ -17,9 +17,10 @@ export function FormUi() {
       setIsLoading(true);
       await updateStatus(id, status);
       setValues({ id: '', status: '', name: '', reason: '' });
-      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      alert(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 

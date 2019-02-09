@@ -3,21 +3,19 @@ import { Table } from 'semantic-ui-react'
 import { Container, Loader, Header, Segment } from 'semantic-ui-react';
 import { TableHeader } from './components/tableHeader';
 import { TableRow } from './components/tableRow';
+import { getGames } from '../../api/getGames';
 
-export default class TableCancellations extends Component {
+export class TableCancellations extends Component {
 
   state = { isLoading: true, cancellations: [] };
 
-  componentDidMount() {
-    fetch('games')
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          cancellations: result,
-          isLoading: false
-        })
-      })
-      .catch(error => console.log(error))
+  async componentDidMount() {
+    try {
+      const result = await getGames();
+      this.setState({ cancellations: result, isLoading: false });
+    } catch (error) {
+      alert(error);
+    }
   }
 
   getTableRows = () => {
