@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { Container, Segment, Form, Input, Header } from 'semantic-ui-react'
 import { updateStatus } from '../api/updateStatus';
+import { ModalAlert } from './ModalAlert';
 
 export function FormUi() {
   const [form, setValues] = useState({ id: '', status: '', reason: '', name: '' });
-
+  const [modalContent, setModalContent] = useState({ header: '', body: '' });
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e, { name, value }) => {
     setValues(({ ...form, [name]: value }))
+  }
+
+  const handlModalClose = () => {
+    setIsModalOpen(false);
   }
 
   const handleSubmit = async () => {
@@ -16,11 +22,14 @@ export function FormUi() {
       const { id, status } = form;
       setIsLoading(true);
       await updateStatus(id, status);
-      setValues({ id: '', status: '', name: '', reason: '' });
+      setModalContent({ header: 'successfully updated', body: 'Game status was update' })
     } catch (error) {
+      setModalContent({ header: 'Error', body: 'there was an error in the server.\ntry again later' })
       alert(error);
     } finally {
+      setValues({ id: '', status: '', name: '', reason: '' });
       setIsLoading(false);
+      setIsModalOpen(true);
     }
   }
 
@@ -64,6 +73,7 @@ export function FormUi() {
           <Form.Button content='Send' color='blue' />
         </Form>
       </Segment>
+      <ModalAlert isOpen={isModalOpen} handleClose={handlModalClose} content={modalContent} />
     </Container>
   )
 }

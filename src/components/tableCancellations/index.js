@@ -28,7 +28,7 @@ export class TableCancellations extends Component {
     return <Container textAlign='justified'>
       <Loader active={isLoading} content='Loading' />
       <Segment>
-        <Header size='large'>Game cancellations</Header>
+        <Header size='large'>Games Cancellations</Header>
         <Table celled structured selectable color='blue' >
           <TableHeader />
           <Table.Body>
