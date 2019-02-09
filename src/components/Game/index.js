@@ -2,15 +2,23 @@ import React, { useState } from 'react';
 import { Container, Segment, Header, Statistic, Icon, Image } from 'semantic-ui-react';
 import { Search } from './components/Search';
 import { findGame } from '../../api/findGame';
+import { ModalAlert } from '../ModalAlert';
 
 export function Game() {
 
   const [form, setValues] = useState({ status: '', reason: '' });
+  const [modalContent, setModalContent] = useState({ header: '', body: '' });
   const [game, setGame] = useState({ groupName: '-', status: '-', cancellationReason: '-', members: '' })
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleChange = (e, { name, value }) => {
     setValues({ ...form, [name]: value })
+  }
+
+  const handlModalClose = () => {
+    setIsModalOpen(false);
   }
 
   const handleSubmit = async () => {
@@ -25,7 +33,8 @@ export function Game() {
         members: result.players.length
       })
     } catch (error) {
-      alert(error);
+      setModalContent({ header: 'Error', body: 'Could not find game. try again later' })
+      setIsModalOpen(true);
     } finally {
       setValues({ status: '', reason: '' });
       setIsLoading(false);
@@ -70,6 +79,7 @@ export function Game() {
           </Statistic>
         </Statistic.Group>
       </Segment>
+      <ModalAlert isOpen={isModalOpen} handleClose={handlModalClose} content={modalContent} />
     </Container>
   )
 }

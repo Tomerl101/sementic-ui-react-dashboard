@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { NavBar } from './components/NavBar';
-import { TableCancellations } from './components/tableCancellations';
+import { TableCancellations } from './components/TableCancellations';
 import { Game } from './components/Game';
 import { FormUi as Form } from './components/Form'
 
