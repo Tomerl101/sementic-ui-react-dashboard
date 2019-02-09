@@ -27,13 +27,13 @@ export function NavBar() {
       >
         Cancellations
         </Menu.Item>
-      <Menu.Item as={Link} to='/card'
-        name='card'
+      <Menu.Item as={Link} to='/game'
+        name='game'
         color='blue'
-        active={activeItem === 'card'}
+        active={activeItem === 'game'}
         onClick={handleItemClick}
       >
-        Card
+        Game
         </Menu.Item>
       <Menu.Item as={Link} to='/add'
         name='add'
