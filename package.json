@@ -1,5 +1,6 @@
 {
   "name": "react-dashboard",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +21,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://gamecancellations.herokuapp.com/",
   "browserslist": [
     ">0.2%",
     "not dead",

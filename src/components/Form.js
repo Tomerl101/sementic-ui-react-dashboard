@@ -25,7 +25,6 @@ export function FormUi() {
       setModalContent({ header: 'successfully updated', body: 'Game status was update' })
     } catch (error) {
       setModalContent({ header: 'Error', body: 'there was an error in the server.\ntry again later' })
-      alert(error);
     } finally {
       setValues({ id: '', status: '', name: '', reason: '' });
       setIsLoading(false);

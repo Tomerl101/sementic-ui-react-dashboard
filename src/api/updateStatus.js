@@ -1,6 +1,6 @@
 export function updateStatus(id, status) {
   return new Promise((resolve, reject) => {
-    fetch(`/game/${id}`, {
+    fetch(`https://cors-anywhere.herokuapp.com/https://gamecancellations.herokuapp.com/game/${id}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

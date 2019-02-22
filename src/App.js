@@ -11,9 +11,9 @@ function App() {
   return <div style={appStyle}>
     <NavBar />
     <Switch>
-      <Route exact path="/" component={TableCancellations} />
-      <Route exact path="/game" component={Game} />
-      <Route exact path="/add" component={Form} />
+      <Route exact path="/2018-2019/dcs/dev_176/" component={TableCancellations} />
+      <Route exact path="/2018-2019/dcs/dev_176/game" component={Game} />
+      <Route exact path="/2018-2019/dcs/dev_176/add" component={Form} />
     </Switch>
   </div>
 }

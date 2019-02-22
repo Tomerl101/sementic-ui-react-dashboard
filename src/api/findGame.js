@@ -1,7 +1,7 @@
 export function findGame(status, reason) {
 
     return new Promise((resolve, reject) => {
-        fetch(`/game/${status}&${reason}`, {
+        fetch(`https://cors-anywhere.herokuapp.com/https://gamecancellations.herokuapp.com//game/${status}&${reason}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
